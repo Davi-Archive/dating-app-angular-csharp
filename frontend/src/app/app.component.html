@@ -1,8 +1,12 @@
-<h1>Dating App</h1>
+<app-nav></app-nav>
 
-<div *ngFor="let user of users">
-  <li>
-    {{ user.id }} -
-    <strong>{{ user.userName }}</strong>
-  </li>
+<div class="container" style="margin-top: 100px;">
+  <div *ngFor="let user of users">
+    <ul>
+      <li>
+        {{ user.id }} -
+        <strong>{{ user.userName }}</strong>
+      </li>
+    </ul>
+  </div>
 </div>
