@@ -42,9 +42,9 @@ namespace DatingApp.Controllers
         public async Task<ActionResult<AppUser>> Login(LoginDto loginDto)
         {
             var user = await _context.Users.SingleOrDefaultAsync(x =>
-            x.UserName == loginDto.Username);   //FirstOrDefaultAsync()
+            x.UserName == loginDto.Username.ToLower());   //FirstOrDefaultAsync()
 
-            if (user == null) return Unauthorized();
+            if (user == null) return Unauthorized("Invalid Username");
 
             using var hmac = new HMACSHA512(user.PaswordSalt);
 
@@ -52,7 +52,7 @@ namespace DatingApp.Controllers
 
             for (int i = 0; i < computedHash.Length; i++)
             {
-                if (computedHash[i] != user.PaswordHash[i]) return Unauthorized();
+                if (computedHash[i] != user.PaswordHash[i]) return Unauthorized("Invalid password");
             }
 
             return user;
