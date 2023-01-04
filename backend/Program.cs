@@ -1,4 +1,6 @@
 using DatingApp.Data;
+using DatingApp.Interface;
+using DatingApp.Services;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -28,6 +30,7 @@ builder.Services.AddCors(options =>
                       });
 });
 
+builder.Services.AddScoped<ITokenService, TokenService>();
 
 var app = builder.Build();
 
