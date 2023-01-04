@@ -38,6 +38,26 @@ namespace DatingApp.Controllers
             return user;
         }
 
+        [HttpPost("login")]
+        public async Task<ActionResult<AppUser>> Login(LoginDto loginDto)
+        {
+            var user = await _context.Users.SingleOrDefaultAsync(x =>
+            x.UserName == loginDto.Username);   //FirstOrDefaultAsync()
+
+            if (user == null) return Unauthorized();
+
+            using var hmac = new HMACSHA512(user.PaswordSalt);
+
+            var computedHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(loginDto.Password));
+
+            for (int i = 0; i < computedHash.Length; i++)
+            {
+                if (computedHash[i] != user.PaswordHash[i]) return Unauthorized();
+            }
+
+            return user;
+        }
+
         private async Task<bool> UserExists(string username)
         {
             return await _context.Users.AnyAsync(x => x.UserName == username.ToLower());
