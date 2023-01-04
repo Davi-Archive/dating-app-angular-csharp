@@ -156,3 +156,8 @@ C:\Users\Machinery\Desktop\Git\dating-app-angular-csharp\backend\obj\Debug\net6.
 C:\Users\Machinery\Desktop\Git\dating-app-angular-csharp\backend\obj\Debug\net6.0\DatingApp.pdb
 C:\Users\Machinery\Desktop\Git\dating-app-angular-csharp\backend\obj\Debug\net6.0\DatingApp.genruntimeconfig.cache
 C:\Users\Machinery\Desktop\Git\dating-app-angular-csharp\backend\obj\Debug\net6.0\ref\DatingApp.dll
+C:\Users\Machinery\Desktop\Git\dating-app-angular-csharp\backend\bin\Debug\net6.0\Microsoft.IdentityModel.Abstractions.dll
+C:\Users\Machinery\Desktop\Git\dating-app-angular-csharp\backend\bin\Debug\net6.0\Microsoft.IdentityModel.JsonWebTokens.dll
+C:\Users\Machinery\Desktop\Git\dating-app-angular-csharp\backend\bin\Debug\net6.0\Microsoft.IdentityModel.Logging.dll
+C:\Users\Machinery\Desktop\Git\dating-app-angular-csharp\backend\bin\Debug\net6.0\Microsoft.IdentityModel.Tokens.dll
+C:\Users\Machinery\Desktop\Git\dating-app-angular-csharp\backend\bin\Debug\net6.0\System.IdentityModel.Tokens.Jwt.dll
