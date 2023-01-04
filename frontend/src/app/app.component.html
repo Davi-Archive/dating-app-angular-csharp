@@ -1,6 +1,16 @@
 <h1>Dating App</h1>
 
 <div *ngFor="let user of users">
-      <p>{{user.id}}</p>
-      <p>{{user.username}}</p>
+  <li>
+    {{ user.id }} -
+    <strong>{{ user.userName }}</strong>
+  </li>
+</div>
+<div class="card" style="width: 18rem;">
+  <img src="..." class="card-img-top" alt="...">
+  <div class="card-body">
+    <h5 class="card-title">Card title</h5>
+    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+    <a href="#" class="btn btn-primary">Go somewhere</a>
+  </div>
 </div>
