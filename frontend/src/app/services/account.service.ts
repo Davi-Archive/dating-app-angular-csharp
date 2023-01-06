@@ -9,7 +9,7 @@ import { User } from '../models/user';
 })
 export class AccountService {
   private currentUserSource = new BehaviorSubject<User | null>(null);
-  currenctUser$ = this.currentUserSource.asObservable();
+  currentUser$ = this.currentUserSource.asObservable();
 
   baseUrl = environment.baseUrl;
 
