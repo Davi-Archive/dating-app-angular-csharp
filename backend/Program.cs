@@ -1,5 +1,6 @@
 using DatingApp.Extensions;
 using DatingApp.Interface;
+using DatingApp.Middleware;
 using DatingApp.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -18,6 +19,9 @@ builder.Services.AddIdentityServices(builder.Configuration);
 builder.Services.AddScoped<ITokenService, TokenService>();
 
 var app = builder.Build();
+
+// MIDDLEWARE FIRST
+app.UseMiddleware<ExceptionMiddleware>();
 
 
 // Configure the HTTP request pipeline.

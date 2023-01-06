@@ -1,5 +1,6 @@
 ﻿using DatingApp.Data;
 using DatingApp.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DatingApp.Controllers
@@ -14,6 +15,7 @@ namespace DatingApp.Controllers
         }
 
 
+        [Authorize]
         [HttpGet("auth")]
         public ActionResult<string> GetSecret()
         {
@@ -23,10 +25,14 @@ namespace DatingApp.Controllers
         [HttpGet("not-found")]
         public ActionResult<AppUser> GetNotFound()
         {
+
             var thing = _context.Users.Find(-1);
             if (thing == null) return NotFound();
 
             return thing;
+
+
+
         }
 
         [HttpGet("server-error")]
