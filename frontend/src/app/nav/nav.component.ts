@@ -7,6 +7,7 @@ import { AccountService } from '../services/account.service';
   styleUrls: ['./nav.component.scss']
 })
 export class NavComponent {
+
   model: any = {}
   loggedIn = false;
 
@@ -25,5 +26,9 @@ export class NavComponent {
       error: err => console.log(err)
 
     })
+  }
+
+  logout() {
+    this.loggedIn = false;
   }
 }
