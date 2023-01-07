@@ -17,4 +17,10 @@
   >
     Test 400 Validation Error
   </button>
+
+  <div class="row mt-5" *ngIf="validationErrors.length > 0">
+    <li *ngFor="let error of validationErrors">
+      {{ error }}
+    </li>
+  </div>
 </ng-container>
