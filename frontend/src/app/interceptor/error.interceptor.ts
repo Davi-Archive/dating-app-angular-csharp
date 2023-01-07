@@ -30,7 +30,7 @@ export class ErrorInterceptor implements HttpInterceptor {
                 }
                 throw modelStateErrors.flat();
               } else {
-                this.toastr.error(error.error.title)
+                this.toastr.error("Bad Request",error.error.status)
               }
               break;
             case 401:
@@ -45,7 +45,6 @@ export class ErrorInterceptor implements HttpInterceptor {
               break
             default:
               this.toastr.error('Somenthing unexpected went wrong');
-              console.log(error);
               break;
 
           }
