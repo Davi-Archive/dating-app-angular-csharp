@@ -1,4 +1,5 @@
 ﻿using DatingApp.Data;
+using DatingApp.Interface;
 using Microsoft.EntityFrameworkCore;
 
 namespace DatingApp.Extensions
@@ -10,6 +11,7 @@ namespace DatingApp.Extensions
         {
             services.AddEndpointsApiExplorer();
             services.AddSwaggerGen();
+            services.AddScoped<IUserRepository, UserRepository>();
             services.AddDbContext<DataContext>(opt =>
             {
                 opt.UseSqlite(config.GetConnectionString("DefaultConnection"));

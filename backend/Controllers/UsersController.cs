@@ -19,8 +19,7 @@ namespace DatingApp.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<AppUser>>> GetUsers()
         {
-            var users = _userRepository.GetUsersAsync();
-            return Ok(await users);
+            return Ok(await _userRepository.GetUsersAsync());
         }
 
         [HttpGet("{username}")]
@@ -31,7 +30,7 @@ namespace DatingApp.Controllers
 
 
 
-        //    [Authorize]   // apply from top class
+        //[Authorize]   // apply from top class
         //[HttpGet("{id}")]
         //public async Task<ActionResult<AppUser>> GetUser(int id)
         //{
