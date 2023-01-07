@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-sm navbar-dark fixed-top bg-dark">
   <div class="container">
-    <a class="navbar-brand" href="#">Dating App</a>
+    <a class="navbar-brand" routerLink="/">Dating App</a>
     <button
       class="navbar-toggler"
       type="button"
@@ -11,22 +11,44 @@
       aria-label="Toggle navigation"
     ></button>
     <div class="collapse navbar-collapse" id="navbarCollapse">
-      <ul class="navbar-nav me-auto mb-2 mb-md-0" *ngIf="accountService.currentUser$ | async">
+      <ul
+        class="navbar-nav me-auto mb-2 mb-md-0"
+        *ngIf="accountService.currentUser$ | async"
+      >
         <li class="nav-item">
-          <a class="nav-link active" href="#">Matches</a>
+          <a
+            class="nav-link"
+            [routerLink]="['/members']"
+            routerLinkActive="active"
+            >Matches</a
+          >
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Lists</a>
+          <a
+            class="nav-link"
+            [routerLink]="['/lists']"
+            routerLinkActive="active"
+            >Lists</a
+          >
         </li>
         <li class="nav-item">
-          <a class="nav-link">Message</a>
+          <a
+            class="nav-link"
+            [routerLink]="['/nessages']"
+            routerLinkActive="active"
+            >Message</a
+          >
         </li>
         <li class="nav-item">
           <a class="nav-link" (click)="logout()">Logout</a>
         </li>
       </ul>
 
-      <div class="dropdown" *ngIf="accountService.currentUser$ | async" dropdown>
+      <div
+        class="dropdown"
+        *ngIf="accountService.currentUser$ | async"
+        dropdown
+      >
         <a
           class="dropdown-toggle text-light text-decoration-none"
           dropdownToggle
