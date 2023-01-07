@@ -1,4 +1,5 @@
-﻿using DatingApp.Entities;
+﻿using DatingApp.DTOs;
+using DatingApp.Entities;
 
 namespace DatingApp.Interface
 {
@@ -6,9 +7,9 @@ namespace DatingApp.Interface
     {
         void Update(AppUser user);
         Task<bool> SaveAllAsync();
-        Task<IEnumerable<AppUser>> GetUsersAsync();
-        Task<AppUser> GetUserByIdAsync(int id);
-        Task<AppUser> GetUserByUsernameAsync(string username);
+        Task<IEnumerable<MemberDto>> GetUsersAsync();
+        Task<MemberDto> GetUserByIdAsync(int id);
+        Task<MemberDto> GetUserByUsernameAsync(string username);
 
     }
 }
