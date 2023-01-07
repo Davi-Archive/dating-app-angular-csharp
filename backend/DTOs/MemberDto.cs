@@ -6,6 +6,7 @@ namespace DatingApp.DTOs
     {
         public int Id { get; set; }
         public string UserName { get; set; }
+        public string PhotoUrl { get; set; }
         public DateOnly DateOfBirth { get; set; }
         public string KnownAs { get; set; }
         public DateTime Created { get; set; } = DateTime.UtcNow;
@@ -54,6 +55,7 @@ namespace DatingApp.DTOs
             City = entity.City;
             Country = entity.Country;
             Photos = entity.Photos.Select(x => new PhotoDto(x)).ToList();
+            PhotoUrl = entity.Photos.First().Url;
         }
 
     }
