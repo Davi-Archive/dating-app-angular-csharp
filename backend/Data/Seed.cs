@@ -24,7 +24,7 @@ namespace DatingApp.Data
                 using var hmac = new HMACSHA512();
 
                 user.UserName = user.UserName.ToLower();
-                user.PaswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes("Password"));
+                user.PaswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes("Pa$$w0rd"));
                 user.PaswordSalt = hmac.Key;
 
                 context.Users.Add(user);

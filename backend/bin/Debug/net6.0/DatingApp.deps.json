@@ -10,6 +10,7 @@
         "dependencies": {
           "Microsoft.AspNetCore.Authentication.JwtBearer": "6.0.12",
           "Microsoft.EntityFrameworkCore.Design": "7.0.1",
+          "Microsoft.EntityFrameworkCore.InMemory": "7.0.1",
           "Microsoft.EntityFrameworkCore.Sqlite": "7.0.1",
           "Swashbuckle.AspNetCore": "6.2.3",
           "System.IdentityModel.Tokens.Jwt": "6.25.1"
@@ -82,6 +83,17 @@
         },
         "runtime": {
           "lib/net6.0/Microsoft.EntityFrameworkCore.Design.dll": {
+            "assemblyVersion": "7.0.1.0",
+            "fileVersion": "7.0.122.55819"
+          }
+        }
+      },
+      "Microsoft.EntityFrameworkCore.InMemory/7.0.1": {
+        "dependencies": {
+          "Microsoft.EntityFrameworkCore": "7.0.1"
+        },
+        "runtime": {
+          "lib/net6.0/Microsoft.EntityFrameworkCore.InMemory.dll": {
             "assemblyVersion": "7.0.1.0",
             "fileVersion": "7.0.122.55819"
           }
@@ -638,6 +650,13 @@
       "sha512": "sha512-g0uZcCGKMDLjdjorAqAp/c2otIndymgBX5PYW9fNSGR2WTBKCKvqVtbIiyKa7ehgHCkZJYV089IsKuxQbEfW+Q==",
       "path": "microsoft.entityframeworkcore.design/7.0.1",
       "hashPath": "microsoft.entityframeworkcore.design.7.0.1.nupkg.sha512"
+    },
+    "Microsoft.EntityFrameworkCore.InMemory/7.0.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-AnIA16TihjWRTdK5uLcPQ6eAxd2x0hv5etXYUkVN9TdkaH2AuhILnDpdAlh6sTIVVDpygqveHl1rFmtvlcZk2w==",
+      "path": "microsoft.entityframeworkcore.inmemory/7.0.1",
+      "hashPath": "microsoft.entityframeworkcore.inmemory.7.0.1.nupkg.sha512"
     },
     "Microsoft.EntityFrameworkCore.Relational/7.0.1": {
       "type": "package",

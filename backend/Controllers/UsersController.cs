@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 namespace DatingApp.Controllers
 {
 
+    [Authorize]
     public class UsersController : BaseApiController
     {
         private readonly DataContext _context;
@@ -23,7 +24,7 @@ namespace DatingApp.Controllers
             return await users;
         }
 
-        [Authorize]
+        //    [Authorize]   // apply from top class
         [HttpGet("{id}")]
         public async Task<ActionResult<AppUser>> GetUser(int id)
         {

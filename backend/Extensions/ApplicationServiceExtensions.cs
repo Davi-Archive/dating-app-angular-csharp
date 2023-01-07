@@ -13,6 +13,7 @@ namespace DatingApp.Extensions
             services.AddDbContext<DataContext>(opt =>
             {
                 opt.UseSqlite(config.GetConnectionString("DefaultConnection"));
+                // opt.UseInMemoryDatabase("DatingApp");
             });
 
             return services;
