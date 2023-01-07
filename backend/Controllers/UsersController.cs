@@ -1,8 +1,7 @@
-﻿using DatingApp.Data;
-using DatingApp.Entities;
+﻿using DatingApp.Entities;
+using DatingApp.Interface;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace DatingApp.Controllers
 {
@@ -10,25 +9,33 @@ namespace DatingApp.Controllers
     [Authorize]
     public class UsersController : BaseApiController
     {
-        private readonly DataContext _context;
+        private readonly IUserRepository _userRepository;
 
-        public UsersController(DataContext context)
+        public UsersController(IUserRepository userRepository)
         {
-            _context = context;
+            _userRepository = userRepository;
         }
 
         [HttpGet]
         public async Task<ActionResult<IEnumerable<AppUser>>> GetUsers()
         {
-            var users = _context.Users.ToListAsync();
-            return await users;
+            var users = _userRepository.GetUsersAsync();
+            return Ok(await users);
         }
 
-        //    [Authorize]   // apply from top class
-        [HttpGet("{id}")]
-        public async Task<ActionResult<AppUser>> GetUser(int id)
+        [HttpGet("{username}")]
+        public async Task<ActionResult<AppUser>> GetUserByUsername(string username)
         {
-            return await _context.Users.FindAsync(id);
+            return await _userRepository.GetUserByUsernameAsync(username);
         }
+
+
+
+        //    [Authorize]   // apply from top class
+        //[HttpGet("{id}")]
+        //public async Task<ActionResult<AppUser>> GetUser(int id)
+        //{
+        //    return await _userRepository.GetUserByIdAsync(id);
+        //}
     }
 }
