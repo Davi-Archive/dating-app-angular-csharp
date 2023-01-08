@@ -15,6 +15,7 @@ export class PhotoEditorComponent implements OnInit {
   @Input() member: Member | undefined;
   uploader: FileUploader | undefined;
   baseUrl = environment.baseUrl;
+  hasBaseDropzoneOver = false;
   user: User | undefined
 
   constructor(private accountService: AccountService) {
@@ -28,6 +29,34 @@ export class PhotoEditorComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.initializeUploader();
+  }
+
+  fileOverBase(e: any) {
+    this.hasBaseDropzoneOver = e;
+  }
+
+  initializeUploader() {
+    this.uploader = new FileUploader({
+      url: this.baseUrl + 'users/add-photo',
+      authToken: 'Bearer ' + this.user?.token,
+      isHTML5: true,
+      allowedFileType: ['image'],
+      removeAfterUpload: true,
+      autoUpload: false,
+      maxFileSize: 10 * 1024 * 1014
+    });
+
+    this.uploader.onAfterAddingFile = (file) => {
+      file.withCredentials = false;
+    }
+
+    this.uploader.onSuccessItem = (item, response, headers) => {
+      if (response) {
+        const photo = JSON.parse(response);
+        this.member?.photos.push(photo);
+      }
+    }
   }
 
 }
