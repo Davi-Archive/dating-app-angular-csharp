@@ -48,7 +48,7 @@ namespace DatingApp.Controllers
         [HttpPost("add-photo")]
         public async Task<ActionResult<PhotoDto>> AddPhoto(IFormFile file)
         {
-            var user = await _userRepository.GetUserByUsernameAsync(User.GetUsername());
+            var user = await _userRepository.GetAppUserByUsernameAsync(User.GetUsername());
 
             if (user == null) return NotFound();
 
@@ -56,15 +56,18 @@ namespace DatingApp.Controllers
 
             if (result.Error != null) return BadRequest(result.Error.Message);
 
-            var photo = new Photo
+            Photo photo = new Photo
             {
                 Url = result.SecureUrl.AbsoluteUri,
-                PublicId = result.PublicId
-            }
+                PublicId = result.PublicId,
+                IsMain = false
+            };
 
             if (user.Photos.Count == 0) photo.IsMain = true;
 
-            user.Photos.Add(new PhotoDto(photo));
+            user.Photos.Add(photo);
+
+            if (await _userRepository.SaveAppUser(user)) return new PhotoDto(photo);
 
             return BadRequest("Problem adding photo");
         }

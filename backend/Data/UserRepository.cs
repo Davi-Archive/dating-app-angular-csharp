@@ -73,5 +73,19 @@ namespace DatingApp.Data
             _context.SaveChanges();
             return true;
         }
+
+        public async Task<AppUser> GetAppUserByUsernameAsync(string username)
+        {
+            AppUser entity = await _context.Users.Include(p => p.Photos).SingleOrDefaultAsync(x => x.UserName == username);
+            return entity;
+        }
+
+        public async Task<bool> SaveAppUser(AppUser user)
+        {
+            if (user == null) return false;
+            _context.Update(user);
+            _context.SaveChanges();
+            return true;
+        }
     }
 }

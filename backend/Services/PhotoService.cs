@@ -12,11 +12,7 @@ namespace DatingApp.Services
 
         public PhotoService(IOptions<CloudinarySettings> config)
         {
-            var acc = new Account
-                (
-                Environment.GetEnvironmentVariable("CLOUDINARY_URL")
-                );
-            _cloudinary = new Cloudinary(acc);
+            _cloudinary = new Cloudinary(Environment.GetEnvironmentVariable("CLOUDINARY_URL"));
         }
 
         public async Task<ImageUploadResult> AddPhotoAsync(IFormFile file)
