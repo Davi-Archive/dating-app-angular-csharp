@@ -67,7 +67,11 @@ namespace DatingApp.Controllers
 
             user.Photos.Add(photo);
 
-            if (await _userRepository.SaveAppUser(user)) return new PhotoDto(photo);
+            if (await _userRepository.SaveAppUser(user))
+            {
+                return CreatedAtAction(nameof(GetUserByUsername),
+                    new { username = user.UserName }, new PhotoDto(photo));
+            }
 
             return BadRequest("Problem adding photo");
         }
