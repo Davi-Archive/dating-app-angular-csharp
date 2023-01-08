@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -11,7 +12,7 @@ export class TestErrorComponent {
   baseUrl = environment.baseUrl;
   validationErrors: string[] = [];
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private spinner: NgxSpinnerService) { }
 
   ngOnInit(): void {
   }
