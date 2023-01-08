@@ -10,6 +10,6 @@ namespace DatingApp.Interface
         Task<IEnumerable<MemberDto>> GetUsersAsync();
         Task<MemberDto> GetUserByIdAsync(int id);
         Task<MemberDto> GetUserByUsernameAsync(string username);
-
+        bool UpdateUser(string username, MemberUpdateDto user);
     }
 }

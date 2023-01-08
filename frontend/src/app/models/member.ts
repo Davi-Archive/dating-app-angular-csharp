@@ -5,6 +5,7 @@ export interface Member {
   userName: string;
   photoUrl: string;
   dateOfBirth: string;
+  description:string;
   age: string
   knownAs: string;
   created: Date;

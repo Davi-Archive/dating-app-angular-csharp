@@ -1,4 +1,5 @@
-﻿using DatingApp.DTOs;
+﻿using System.Security.Claims;
+using DatingApp.DTOs;
 using DatingApp.Interface;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -27,6 +28,17 @@ namespace DatingApp.Controllers
         {
             return await _userRepository.GetUserByUsernameAsync(username);
         }
+
+        [HttpPut]
+        public async Task<ActionResult> UpdateUser(MemberUpdateDto memberUpdateDto)
+        {
+            string username = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+
+            if (_userRepository.UpdateUser(username, memberUpdateDto)) return NoContent();
+
+            return BadRequest("Failed to update the user");
+        }
+
 
 
 

@@ -46,9 +46,32 @@ namespace DatingApp.Data
             return await _context.SaveChangesAsync() > 0;
         }
 
-        public void Update(AppUser user)
+        public async void Update(AppUser user)
         {
             _context.Entry(user).State = EntityState.Modified;
+        }
+
+        public bool UpdateUser(string username, MemberUpdateDto dto)
+        {
+            AppUser entity = _context.Users.FirstOrDefault(u => u.UserName == username);
+            if (entity == null) return false;
+
+            if (dto.Interests == entity.Interests &&
+                dto.Introduction == entity.Introduction &&
+                dto.Country == entity.Country &&
+                dto.City == entity.City &&
+                dto.LookingFor == entity.LookingFor
+                ) { return false; }
+
+            entity.Introduction = dto.Introduction;
+            entity.LookingFor = dto.LookingFor;
+            entity.Interests = dto.Interests;
+            entity.City = dto.City;
+            entity.Country = dto.Country;
+
+            _context.Update(entity);
+            _context.SaveChanges();
+            return true;
         }
     }
 }
