@@ -7,7 +7,7 @@ namespace DatingApp.DTOs
         public int Id { get; set; }
         public string UserName { get; set; }
         public string PhotoUrl { get; set; }
-        public DateOnly DateOfBirth { get; set; }
+        public int Age { get; set; }
         public string KnownAs { get; set; }
         public DateTime Created { get; set; } = DateTime.UtcNow;
         public DateTime LastActive { get; set; } = DateTime.UtcNow;
@@ -23,11 +23,11 @@ namespace DatingApp.DTOs
         {
         }
 
-        public MemberDto(int id, string userName, DateOnly dateOfBirth, string knownAs, DateTime created, DateTime lastActive, string gender, string introduction, string lookingFor, string interests, string city, string country, List<PhotoDto> photos)
+        public MemberDto(int id, string userName, int age, string knownAs, DateTime created, DateTime lastActive, string gender, string introduction, string lookingFor, string interests, string city, string country, List<PhotoDto> photos)
         {
             Id = id;
             UserName = userName;
-            DateOfBirth = dateOfBirth;
+            Age = age;
             KnownAs = knownAs;
             Created = created;
             LastActive = lastActive;
@@ -44,7 +44,7 @@ namespace DatingApp.DTOs
         {
             Id = entity.Id;
             UserName = entity.UserName;
-            DateOfBirth = entity.DateOfBirth;
+            Age = entity.GetAge();
             KnownAs = entity.KnownAs;
             Created = entity.Created;
             LastActive = entity.Created;
