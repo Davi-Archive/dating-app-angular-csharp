@@ -1,5 +1,6 @@
-﻿using System.Security.Claims;
-using DatingApp.DTOs;
+﻿using DatingApp.DTOs;
+using DatingApp.Entities;
+using DatingApp.Extensions;
 using DatingApp.Interface;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -12,9 +13,14 @@ namespace DatingApp.Controllers
     {
         private readonly IUserRepository _userRepository;
 
-        public UsersController(IUserRepository userRepository)
+        private readonly IPhotoService _photoService;
+
+        public UsersController(
+            IUserRepository userRepository,
+            IPhotoService photoService)
         {
             _userRepository = userRepository;
+            _photoService = photoService;
         }
 
         [HttpGet]
@@ -32,12 +38,37 @@ namespace DatingApp.Controllers
         [HttpPut]
         public async Task<ActionResult> UpdateUser(MemberUpdateDto memberUpdateDto)
         {
-            string username = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            string username = User.GetUsername();
 
             if (_userRepository.UpdateUser(username, memberUpdateDto)) return NoContent();
 
             return BadRequest("Failed to update the user");
         }
+
+        [HttpPost("add-photo")]
+        public async Task<ActionResult<PhotoDto>> AddPhoto(IFormFile file)
+        {
+            var user = await _userRepository.GetUserByUsernameAsync(User.GetUsername());
+
+            if (user == null) return NotFound();
+
+            var result = await _photoService.AddPhotoAsync(file);
+
+            if (result.Error != null) return BadRequest(result.Error.Message);
+
+            var photo = new Photo
+            {
+                Url = result.SecureUrl.AbsoluteUri,
+                PublicId = result.PublicId
+            }
+
+            if (user.Photos.Count == 0) photo.IsMain = true;
+
+            user.Photos.Add(new PhotoDto(photo));
+
+            return BadRequest("Problem adding photo");
+        }
+
 
 
 
