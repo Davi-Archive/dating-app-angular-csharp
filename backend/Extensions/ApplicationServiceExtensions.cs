@@ -1,7 +1,8 @@
-﻿using DatingApp.Data;
-using DatingApp.Helpers;
+﻿using CloudinaryDotNet;
+using DatingApp.Data;
 using DatingApp.Interface;
 using DatingApp.Services;
+using dotenv.net;
 using Microsoft.EntityFrameworkCore;
 
 namespace DatingApp.Extensions
@@ -15,11 +16,13 @@ namespace DatingApp.Extensions
             services.AddSwaggerGen();
             services.AddScoped<ITokenService, TokenService>();
             services.AddScoped<IUserRepository, UserRepository>();
-            services.Configure<CloudinarySettings>(config.GetSection("CloudinarySettings"));
+            DotEnv.Load(options: new DotEnvOptions(probeForEnv: true));
+            Cloudinary cloudinary = new(Environment.GetEnvironmentVariable("CLOUDINARY_URL"));
+            services.AddScoped<IPhotoService, PhotoService>();
+            cloudinary.Api.Secure = true;
             services.AddDbContext<DataContext>(opt =>
             {
                 opt.UseSqlite(config.GetConnectionString("DefaultConnection"));
-                // opt.UseInMemoryDatabase("DatingApp");
             });
 
             return services;

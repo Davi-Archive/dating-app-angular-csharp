@@ -74,3 +74,6 @@ C:\Users\Machinery\Desktop\Git\dating-app-angular-csharp\backend\obj\Debug\net7.
 C:\Users\Machinery\Desktop\Git\dating-app-angular-csharp\backend\obj\Debug\net7.0\DatingApp.pdb
 C:\Users\Machinery\Desktop\Git\dating-app-angular-csharp\backend\obj\Debug\net7.0\DatingApp.genruntimeconfig.cache
 C:\Users\Machinery\Desktop\Git\dating-app-angular-csharp\backend\obj\Debug\net7.0\ref\DatingApp.dll
+C:\Users\Machinery\Desktop\Git\dating-app-angular-csharp\backend\bin\Debug\net7.0\CloudinaryDotNet.dll
+C:\Users\Machinery\Desktop\Git\dating-app-angular-csharp\backend\bin\Debug\net7.0\dotenv.net.dll
+C:\Users\Machinery\Desktop\Git\dating-app-angular-csharp\backend\bin\Debug\net7.0\Newtonsoft.Json.dll
