@@ -13,11 +13,13 @@ namespace DatingApp.Controllers
     {
         private readonly DataContext _context;
         private readonly ITokenService _tokenService;
+        private readonly IUserRepository _userRepository;
 
-        public AccountController(DataContext context, ITokenService tokenService)
+        public AccountController(DataContext context, ITokenService tokenService, IUserRepository userRepository)
         {
             _context = context;
             _tokenService = tokenService;
+            _userRepository = userRepository;
         }
 
 
@@ -44,8 +46,9 @@ namespace DatingApp.Controllers
         [HttpPost("login")]
         public async Task<ActionResult<UserDto>> Login(LoginDto loginDto)
         {
-            var user = await _context.Users.SingleOrDefaultAsync(x =>
-            x.UserName == loginDto.Username.ToLower());   //FirstOrDefaultAsync()
+            var user = await _userRepository.GetAppUserByUsernameAsync(loginDto.Username);
+            //    var user = await _context.Users.SingleOrDefaultAsync(x =>
+            //    x.UserName == loginDto.Username.ToLower());   //FirstOrDefaultAsync()
 
             if (user == null) return Unauthorized("Invalid Username");
 
@@ -57,12 +60,13 @@ namespace DatingApp.Controllers
             {
                 if (computedHash[i] != user.PaswordHash[i]) return Unauthorized("Invalid password");
             }
-
+            Console.WriteLine(user.Photos.FirstOrDefault(x => x.IsMain == true)?.Id);
 
             return new UserDto
             {
                 UserName = user.UserName,
-                Token = _tokenService.CreateToken(user)
+                Token = _tokenService.CreateToken(user),
+                PhotoUrl = user.Photos.First()?.Url
             };
         }
 

@@ -57,9 +57,10 @@
 
       <div
         class="dropdown"
-        *ngIf="(accountService.currentUser$ | async) as user"
+        *ngIf="accountService.currentUser$ | async as user"
         dropdown
       >
+        <img [src]="user.photoUrl" alt="user photo" />
         <a
           class="dropdown-toggle text-light text-decoration-none"
           dropdownToggle
