@@ -37,7 +37,10 @@ namespace DatingApp.Data
 
         public async Task<IEnumerable<MemberDto>> GetUsersAsync()
         {
-            List<AppUser> list = await _context.Users.Include(p => p.Photos).ToListAsync();
+            List<AppUser> list = await _context.Users
+                .Take(4)
+                .Skip(4)
+                .Include(p => p.Photos).ToListAsync();
             return list.Select(user => new MemberDto(user)).ToList();
         }
 
