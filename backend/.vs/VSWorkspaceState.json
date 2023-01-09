@@ -1,8 +1,9 @@
 {
   "ExpandedNodes": [
     "",
+    "\\Helpers",
     "\\Middleware"
   ],
-  "SelectedNode": "\\Middleware\\ExceptionMiddleware.cs",
+  "SelectedNode": "\\Helpers\\CloudinarySettings.cs",
   "PreviewInSolutionExplorer": false
 }
