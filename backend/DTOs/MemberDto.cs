@@ -55,7 +55,7 @@ namespace DatingApp.DTOs
             City = entity.City;
             Country = entity.Country;
             Photos = entity.Photos.Select(x => new PhotoDto(x)).ToList();
-            PhotoUrl = entity.Photos.First().Url;
+            PhotoUrl = entity.Photos.FirstOrDefault()?.Url;
         }
 
     }

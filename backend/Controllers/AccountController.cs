@@ -24,7 +24,7 @@ namespace DatingApp.Controllers
 
 
         [HttpPost("register")]  // api/account/register
-        public async Task<ActionResult<RegisterDto>> Register(RegisterDto registerDto)
+        public async Task<ActionResult<UserDto>> Register(RegisterDto registerDto)
         {
             if (await UserExists(registerDto.Username)) return BadRequest("Username is taken");
 
@@ -34,13 +34,23 @@ namespace DatingApp.Controllers
             {
                 UserName = registerDto.Username.ToLower(),
                 PaswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(registerDto.Password)),
-                PaswordSalt = hmac.Key
+                PaswordSalt = hmac.Key,
+                City = registerDto.City,
+                Country = registerDto.Country,
+                DateOfBirth = (DateOnly)registerDto.DateOfBirth,
+                Gender = registerDto.Gender,
+                KnownAs = registerDto.KnownAs,
             };
 
             _context.Users.Add(user);
             await _context.SaveChangesAsync();
 
-            return registerDto;
+            return new UserDto
+            {
+                UserName = user.UserName,
+                Token = _tokenService.CreateToken(user),
+                KnownAs = user.KnownAs,
+            };
         }
 
         [HttpPost("login")]
