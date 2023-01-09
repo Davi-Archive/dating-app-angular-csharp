@@ -94,12 +94,19 @@ namespace DatingApp.Data
 
         public async Task<PagedList<MemberDto>> GetMembersAsync(UserParams userParams)
         {
-            var query = _context.Users
-                .Include(p => p.Photos)
-                .AsNoTracking();
+            var query = _context.Users.Include(p => p.Photos).AsQueryable();
+
+            var minDob = DateOnly.FromDateTime(DateTime.Today.AddYears(-userParams.MaxAge - 1));
+            var maxDob = DateOnly.FromDateTime(DateTime.Today.AddYears(-userParams.MinAge));
+
+            query = query.Where(u => u.UserName != userParams.CurrentUsername);
+            query = query.Where(u => u.Gender == userParams.Gender);
+            query = query.Where(u => u.DateOfBirth >= minDob && u.DateOfBirth <= maxDob);
+
             var dto = query.Select(appUser => new MemberDto(appUser));
 
-            return await PagedList<MemberDto>.CreateAsync(dto, userParams.PageNumber, userParams.PageSize);
+            return await PagedList<MemberDto>.CreateAsync(
+                dto, userParams.PageNumber, userParams.PageSize);
         }
     }
 }

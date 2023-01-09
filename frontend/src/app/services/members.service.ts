@@ -16,12 +16,7 @@ export class MembersService {
   constructor(private http: HttpClient) { }
 
   getMembers(page?: number, itemsPerPage?: number) {
-    let params = new HttpParams();
-
-    if (page && itemsPerPage) {
-      params = params.append('pageNumber', page);
-      params = params.append('pageSize', itemsPerPage);
-    }
+    let params = this.getPaginationHeaders(page, itemsPerPage);
 
     return this.http.get<Member[]>(this.baseUrl + 'users', { observe: 'response', params }).pipe(
       map(response => {
@@ -35,6 +30,16 @@ export class MembersService {
         return this.paginatedResult;
       })
     )
+  }
+
+  private getPaginationHeaders(page: number | undefined, itemsPerPage: number | undefined) {
+    let params = new HttpParams();
+
+    if (page && itemsPerPage) {
+      params = params.append('pageNumber', page);
+      params = params.append('pageSize', itemsPerPage);
+    }
+    return params;
   }
 
   getMember(username: string) {
