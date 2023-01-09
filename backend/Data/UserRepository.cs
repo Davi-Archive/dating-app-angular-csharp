@@ -1,5 +1,6 @@
 ﻿using DatingApp.DTOs;
 using DatingApp.Entities;
+using DatingApp.Helpers;
 using DatingApp.Interface;
 using Microsoft.EntityFrameworkCore;
 
@@ -89,6 +90,16 @@ namespace DatingApp.Data
             _context.Update(user);
             _context.SaveChanges();
             return true;
+        }
+
+        public async Task<PagedList<MemberDto>> GetMembersAsync(UserParams userParams)
+        {
+            var query = _context.Users
+                .Include(p => p.Photos)
+                .AsNoTracking();
+            var dto = query.Select(appUser => new MemberDto(appUser));
+
+            return await PagedList<MemberDto>.CreateAsync(dto, userParams.PageNumber, userParams.PageSize);
         }
     }
 }

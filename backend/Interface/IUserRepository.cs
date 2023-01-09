@@ -1,5 +1,6 @@
 ﻿using DatingApp.DTOs;
 using DatingApp.Entities;
+using DatingApp.Helpers;
 
 namespace DatingApp.Interface
 {
@@ -12,6 +13,7 @@ namespace DatingApp.Interface
         Task<MemberDto> GetUserByUsernameAsync(string username);
         bool UpdateUser(string username, MemberUpdateDto user);
         Task<AppUser> GetAppUserByUsernameAsync(string username);
+        Task<PagedList<MemberDto>> GetMembersAsync(UserParams userParams);
         Task<bool> SaveAppUser(AppUser user);
     }
 }

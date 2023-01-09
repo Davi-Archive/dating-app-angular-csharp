@@ -3,7 +3,7 @@ using DatingApp.Helpers;
 
 namespace DatingApp.Extensions
 {
-    public class HttpExtensions
+    public static class HttpExtensions
     {
         public static void AddPaginationHeader(this HttpResponse response, PaginationHeader header)
         {
