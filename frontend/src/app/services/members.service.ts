@@ -18,6 +18,7 @@ export class MembersService {
   constructor(private http: HttpClient) { }
 
   getMembers(userParams: UserParams) {
+
     const response = this.memberCache.get(Object.values(userParams).join('-'))
 
     if (response) return of(response);
@@ -32,6 +33,32 @@ export class MembersService {
         return response;
       })
     )
+  }
+
+  getMember(username: string) {
+    const member = [...this.memberCache.values()]
+      .reduce((arr, elem) => arr.concat(elem.result), [])
+      .find((member: Member) => member.userName === username);
+
+    if (member) return of(member);
+    return this.http.get<Member>(this.baseUrl + 'users/' + username)
+  }
+
+  updateMember(member: Member) {
+    return this.http.put(this.baseUrl + 'users', member).pipe(
+      map(() => {
+        const index = this.members.indexOf(member);
+        this.members[index] = { ...this.members[index], ...member }
+      })
+    );
+  }
+
+  setMainPhoto(photoId: number) {
+    return this.http.put(this.baseUrl + 'users/set-main-photo/' + photoId, {});
+  }
+
+  deletePhoto(photoId: number) {
+    return this.http.delete(this.baseUrl + 'users/delete-photo/' + photoId);
   }
 
   private getPaginatedResult<T>(url: string, params: HttpParams) {
@@ -55,29 +82,6 @@ export class MembersService {
     params = params.append('pageNumber', pageNumber);
     params = params.append('pageSize', pageSize);
     return params;
-  }
-
-  getMember(username: string) {
-    const member = this.members.find(x => x.userName === username);
-    if (member) return of(member);
-    return this.http.get<Member>(this.baseUrl + 'users/' + username)
-  }
-
-  updateMember(member: Member) {
-    return this.http.put(this.baseUrl + 'users', member).pipe(
-      map(() => {
-        const index = this.members.indexOf(member);
-        this.members[index] = { ...this.members[index], ...member }
-      })
-    );
-  }
-
-  setMainPhoto(photoId: number) {
-    return this.http.put(this.baseUrl + 'users/set-main-photo/' + photoId, {});
-  }
-
-  deletePhoto(photoId: number) {
-    return this.http.delete(this.baseUrl + 'users/delete-photo/' + photoId);
   }
 
 }
