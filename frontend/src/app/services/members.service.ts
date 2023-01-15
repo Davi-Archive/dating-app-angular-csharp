@@ -4,6 +4,7 @@ import { map, of } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Member } from '../models/member';
 import { PaginatedResult } from '../models/pagination';
+import { UserParams } from '../models/userParams';
 
 @Injectable({
   providedIn: 'root'
@@ -15,30 +16,34 @@ export class MembersService {
 
   constructor(private http: HttpClient) { }
 
-  getMembers(page?: number, itemsPerPage?: number) {
-    let params = this.getPaginationHeaders(page, itemsPerPage);
+  getMembers(userParams: UserParams) {
+    let params = this.getPaginationHeaders(userParams.pageNumber, userParams.pageSize);
+    params = params.append('minAge', userParams.minAge)
+    params = params.append('maxAge', userParams.minAge)
+    params = params.append('gender', userParams.minAge)
+    return this.getPaginatedResult<Member[]>(this.baseUrl + "users", params)
+  }
 
-    return this.http.get<Member[]>(this.baseUrl + 'users', { observe: 'response', params }).pipe(
+  private getPaginatedResult<T>(url: string, params: HttpParams) {
+    const paginatedResult: PaginatedResult<T> = new PaginatedResult<T>;
+    return this.http.get<T>(url, { observe: 'response', params }).pipe(
       map(response => {
         if (response.body) {
-          this.paginatedResult.result = response.body;
+          paginatedResult.result = response.body;
         }
         const pagination = response.headers.get('Pagination');
         if (pagination) {
-          this.paginatedResult.pagination = JSON.parse(pagination);
+          paginatedResult.pagination = JSON.parse(pagination);
         }
-        return this.paginatedResult;
+        return paginatedResult;
       })
-    )
+    );
   }
 
-  private getPaginationHeaders(page: number | undefined, itemsPerPage: number | undefined) {
+  private getPaginationHeaders(pageNumber: number, pageSize: number) {
     let params = new HttpParams();
-
-    if (page && itemsPerPage) {
-      params = params.append('pageNumber', page);
-      params = params.append('pageSize', itemsPerPage);
-    }
+    params = params.append('pageNumber', pageNumber);
+    params = params.append('pageSize', pageSize);
     return params;
   }
 
@@ -65,18 +70,4 @@ export class MembersService {
     return this.http.delete(this.baseUrl + 'users/delete-photo/' + photoId);
   }
 
-  // Bearer token on requisition
-  // getHttpOptions() {
-  //   const userString = localStorage.getItem('user');
-  //   if (!userString) return;
-
-  //   const user = JSON.parse(userString);
-
-  //   return {
-  //     headers: new HttpHeaders({
-  //       Authorization: 'Bearer ' + user.token
-  //     })
-  //   }
-
-  // }
 }
