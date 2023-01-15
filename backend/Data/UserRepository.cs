@@ -21,6 +21,12 @@ namespace DatingApp.Data
             return new MemberDto(user);
         }
 
+        public async Task<AppUser> GetAppUserByIdAsync(int id)
+        {
+            AppUser user = await _context.Users.FindAsync(id);
+            return user;
+        }
+
         public async Task<MemberDto> GetUserByUsernameAsync(string username)
         {
             MemberDto dto = new MemberDto();

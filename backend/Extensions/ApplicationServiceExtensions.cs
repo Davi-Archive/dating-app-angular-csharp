@@ -1,5 +1,6 @@
 ﻿using CloudinaryDotNet;
 using DatingApp.Data;
+using DatingApp.Helpers;
 using DatingApp.Interface;
 using DatingApp.Services;
 using dotenv.net;
@@ -16,6 +17,7 @@ namespace DatingApp.Extensions
             services.AddSwaggerGen();
             services.AddScoped<ITokenService, TokenService>();
             services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<LogUserActivity>();
             DotEnv.Load(options: new DotEnvOptions(probeForEnv: true));
             Cloudinary cloudinary = new(Environment.GetEnvironmentVariable("CLOUDINARY_URL"));
             services.AddScoped<IPhotoService, PhotoService>();
