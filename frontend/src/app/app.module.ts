@@ -28,6 +28,7 @@ import { MessagesComponent } from './messages/messages.component';
 import { SharedModule } from './modules/shared.module';
 import { NavComponent } from './nav/nav.component';
 import { RegisterComponent } from './register/register.component';
+import { MemberMessagesComponent } from './members/member-messages/member-messages.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import { RegisterComponent } from './register/register.component';
     MemberEditComponent,
     PhotoEditorComponent,
     TextInputComponent,
-    DatePickerComponent
+    DatePickerComponent,
+    MemberMessagesComponent
   ],
   imports: [
     BrowserAnimationsModule,
