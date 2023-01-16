@@ -49,6 +49,7 @@
     </thead>
     <tbody class="align-middle">
       <tr
+        [hidden]="loading"
         *ngFor="let message of messages"
         routerLink="{{
           container === 'Outbox'
