@@ -18,6 +18,7 @@ namespace DatingApp.Extensions
             services.AddScoped<ITokenService, TokenService>();
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<ILikesRepository, LikesRepository>();
+            services.AddScoped<IMessageRepository, MessageRepository>();
             services.AddScoped<LogUserActivity>();
             DotEnv.Load(options: new DotEnvOptions(probeForEnv: true));
             Cloudinary cloudinary = new(Environment.GetEnvironmentVariable("CLOUDINARY_URL"));
