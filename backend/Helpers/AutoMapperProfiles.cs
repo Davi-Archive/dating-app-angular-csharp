@@ -6,7 +6,7 @@ namespace DatingApp.Helpers
 {
     public class AutoMapperProfiles : Profile
     {
-        protected AutoMapperProfiles()
+        public AutoMapperProfiles()
         {
             CreateMap<AppUser, MemberDto>();
             CreateMap<Photo, PhotoDto>();

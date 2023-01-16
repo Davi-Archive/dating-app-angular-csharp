@@ -77,3 +77,5 @@ C:\Users\Machinery\Desktop\Git\dating-app-angular-csharp\backend\obj\Debug\net7.
 C:\Users\Machinery\Desktop\Git\dating-app-angular-csharp\backend\bin\Debug\net7.0\CloudinaryDotNet.dll
 C:\Users\Machinery\Desktop\Git\dating-app-angular-csharp\backend\bin\Debug\net7.0\dotenv.net.dll
 C:\Users\Machinery\Desktop\Git\dating-app-angular-csharp\backend\bin\Debug\net7.0\Newtonsoft.Json.dll
+C:\Users\Machinery\Desktop\Git\dating-app-angular-csharp\backend\bin\Debug\net7.0\AutoMapper.dll
+C:\Users\Machinery\Desktop\Git\dating-app-angular-csharp\backend\bin\Debug\net7.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
