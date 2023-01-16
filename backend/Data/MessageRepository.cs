@@ -47,7 +47,7 @@ namespace DatingApp.Data
                 && u.RecipientDeleted == false),
                 "Outbox" => query.Where(u => u.SenderUsername == messageParams.Username
                 && u.SenderDeleted == false),
-                _ => query.Where(u => u.RecipientUsername == messageParams.Username &&
+                _ => query.Where(u => u.RecipientUsername == messageParams.Username
                && u.RecipientDeleted == false && u.DateRead == null),
             };
 
