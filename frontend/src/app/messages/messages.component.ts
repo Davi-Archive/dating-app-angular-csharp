@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
 import { Message } from '../models/message';
 import { Pagination } from '../models/pagination';
 import { MessageService } from '../services/message.service';
@@ -21,8 +22,11 @@ export class MessagesComponent implements OnInit {
     this.loadMessages();
   }
 
-  loadMessages() {
-    this.messageService.getMessages(this.pageNumber, this.pageSize, this.container).subscribe({
+  loadMessages(type?: string) {
+    if (type == undefined) type = 'Unread';
+    this.container = type;
+
+    this.messageService.getMessages(this.pageNumber, this.pageSize, this.container!).subscribe({
       next: response => {
         this.messages = response.result;
         this.pagination = response.pagination;
