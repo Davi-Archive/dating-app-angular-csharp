@@ -20,32 +20,24 @@ namespace DatingApp.Extensions
             .AddEntityFrameworkStores<DataContext>();
 
             var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).
-    AddJwtBearer(options =>
-    {
-        options.TokenValidationParameters = new TokenValidationParameters
-        {
-            ValidateIssuerSigningKey = true,
-            IssuerSigningKey = new SymmetricSecurityKey(Encoding
-            .UTF8.GetBytes(config["TokenKey"])),
-            ValidateIssuer = false,
-            ValidateAudience = false
-        };
-    });
-
-
-            //services.AddCors(options =>
-            //{
-            //    options.AddPolicy(name: MyAllowSpecificOrigins,
-            //                      policy =>
-            //                      {
-            //                          policy
-            //                          .AllowAnyHeader()
-            //                          .AllowAnyMethod()
-            //                          .WithOrigins("http://localhost:4200");
-            //                      });
-            //});
-
+             AddJwtBearer(options =>
+                    {
+                        options.TokenValidationParameters = new TokenValidationParameters
+                        {
+                            ValidateIssuerSigningKey = true,
+                            IssuerSigningKey = new SymmetricSecurityKey(Encoding
+                              .UTF8.GetBytes(config["TokenKey"])),
+                            ValidateIssuer = false,
+                            ValidateAudience = false
+                        };
+                    });
+            services.AddAuthorization(opt =>
+            {
+                opt.AddPolicy("RequireAdminRole", policy => policy.RequireRole("Admin"));
+                opt.AddPolicy("ModeratePhotoRole", policy => policy.RequireRole("Admin", "Moderator"));
+            });
             return services;
         }
     }
