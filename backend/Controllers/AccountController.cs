@@ -1,5 +1,4 @@
 ﻿using System.Security.Cryptography;
-using System.Text;
 using AutoMapper;
 using DatingApp.Data;
 using DatingApp.DTOs;
@@ -59,14 +58,14 @@ namespace DatingApp.Controllers
 
             if (user == null) return Unauthorized("Invalid Username");
 
-            using var hmac = new HMACSHA512(user.PaswordSalt);
+            //using var hmac = new HMACSHA512(user.PaswordSalt);
 
-            var computedHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(loginDto.Password));
+            // var computedHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(loginDto.Password));
 
-            for (int i = 0; i < computedHash.Length; i++)
-            {
-                if (computedHash[i] != user.PaswordHash[i]) return Unauthorized("Invalid password");
-            }
+            // for (int i = 0; i < computedHash.Length; i++)
+            //  {
+            // if (computedHash[i] != user.PaswordHash[i]) return Unauthorized("Invalid password");
+            //  }
             Console.WriteLine(user.Photos.FirstOrDefault(x => x.IsMain == true)?.Id);
 
             return new UserDto

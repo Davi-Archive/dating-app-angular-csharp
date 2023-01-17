@@ -79,3 +79,8 @@ C:\Users\Machinery\Desktop\Git\dating-app-angular-csharp\backend\bin\Debug\net7.
 C:\Users\Machinery\Desktop\Git\dating-app-angular-csharp\backend\bin\Debug\net7.0\Newtonsoft.Json.dll
 C:\Users\Machinery\Desktop\Git\dating-app-angular-csharp\backend\bin\Debug\net7.0\AutoMapper.dll
 C:\Users\Machinery\Desktop\Git\dating-app-angular-csharp\backend\bin\Debug\net7.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+C:\Users\Machinery\Desktop\Git\dating-app-angular-csharp\backend\bin\Debug\net7.0\Microsoft.AspNetCore.Cryptography.Internal.dll
+C:\Users\Machinery\Desktop\Git\dating-app-angular-csharp\backend\bin\Debug\net7.0\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
+C:\Users\Machinery\Desktop\Git\dating-app-angular-csharp\backend\bin\Debug\net7.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
+C:\Users\Machinery\Desktop\Git\dating-app-angular-csharp\backend\bin\Debug\net7.0\Microsoft.Extensions.Identity.Core.dll
+C:\Users\Machinery\Desktop\Git\dating-app-angular-csharp\backend\bin\Debug\net7.0\Microsoft.Extensions.Identity.Stores.dll
