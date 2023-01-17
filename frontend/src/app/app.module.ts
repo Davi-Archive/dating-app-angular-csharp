@@ -30,6 +30,7 @@ import { NavComponent } from './nav/nav.component';
 import { RegisterComponent } from './register/register.component';
 import { MemberMessagesComponent } from './members/member-messages/member-messages.component';
 import { AdminPanelComponent } from './admin/admin-panel/admin-panel.component';
+import { HasRoleDirective } from './directives/has-role.directive';
 
 @NgModule({
   declarations: [
@@ -50,7 +51,8 @@ import { AdminPanelComponent } from './admin/admin-panel/admin-panel.component';
     TextInputComponent,
     DatePickerComponent,
     MemberMessagesComponent,
-    AdminPanelComponent
+    AdminPanelComponent,
+    HasRoleDirective
   ],
   imports: [
     BrowserAnimationsModule,
