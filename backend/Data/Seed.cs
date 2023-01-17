@@ -1,5 +1,4 @@
 ﻿using System.Security.Cryptography;
-using System.Text;
 using System.Text.Json;
 using DatingApp.Entities;
 using Microsoft.EntityFrameworkCore;
@@ -24,8 +23,6 @@ namespace DatingApp.Data
                 using var hmac = new HMACSHA512();
 
                 user.UserName = user.UserName.ToLower();
-                user.PaswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes("Pa$$w0rd"));
-                user.PaswordSalt = hmac.Key;
 
                 context.Users.Add(user);
             }

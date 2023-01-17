@@ -1,5 +1,6 @@
 ﻿using System.Security.Cryptography;
 using System.Text;
+using AutoMapper;
 using DatingApp.Data;
 using DatingApp.DTOs;
 using DatingApp.Entities;
@@ -14,12 +15,14 @@ namespace DatingApp.Controllers
         private readonly DataContext _context;
         private readonly ITokenService _tokenService;
         private readonly IUserRepository _userRepository;
+        private readonly IMapper _mapper;
 
-        public AccountController(DataContext context, ITokenService tokenService, IUserRepository userRepository)
+        public AccountController(DataContext context, ITokenService tokenService, IUserRepository userRepository, IMapper mapper)
         {
             _context = context;
             _tokenService = tokenService;
             _userRepository = userRepository;
+            _mapper = mapper;
         }
 
 
@@ -30,17 +33,7 @@ namespace DatingApp.Controllers
 
             using var hmac = new HMACSHA512();
 
-            var user = new AppUser
-            {
-                UserName = registerDto.Username.ToLower(),
-                PaswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(registerDto.Password)),
-                PaswordSalt = hmac.Key,
-                City = registerDto.City,
-                Country = registerDto.Country,
-                DateOfBirth = (DateOnly)registerDto.DateOfBirth,
-                Gender = registerDto.Gender,
-                KnownAs = registerDto.KnownAs,
-            };
+            var user = _mapper.Map<AppUser>(registerDto);
 
             _context.Users.Add(user);
             await _context.SaveChangesAsync();
