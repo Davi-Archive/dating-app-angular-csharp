@@ -4,6 +4,7 @@ using DatingApp.Extensions;
 using DatingApp.Interface;
 using DatingApp.Middleware;
 using DatingApp.Services;
+using DatingApp.SignalR;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -44,6 +45,7 @@ app.UseAuthorization();
 
 
 app.MapControllers();
+app.MapHub<PresenceHub>("hubs/presence");
 
 // seed database data
 

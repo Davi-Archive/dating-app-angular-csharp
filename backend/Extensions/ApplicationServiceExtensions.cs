@@ -29,6 +29,7 @@ namespace DatingApp.Extensions
             {
                 opt.UseSqlite(config.GetConnectionString("DefaultConnection"));
             });
+            services.AddSignalR();
 
             return services;
         }
