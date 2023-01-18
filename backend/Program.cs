@@ -39,7 +39,6 @@ app.UseSwaggerUI();
 app.UseCors(builder => builder
 .AllowAnyHeader()
 .AllowAnyMethod()
-//.AllowCredentials()
 .AllowAnyOrigin());
 
 // authentication SPECIFIC LOCATION
