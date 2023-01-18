@@ -8,6 +8,7 @@ import { FileUploadModule } from 'ng2-file-upload';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PaginationModule } from 'ngx-bootstrap/pagination'
+import { ModalModule } from 'ngx-bootstrap/modal';
 
 @NgModule({
   declarations: [],
@@ -22,7 +23,8 @@ import { PaginationModule } from 'ngx-bootstrap/pagination'
     FileUploadModule,
     BsDatepickerModule.forRoot(),
     BrowserAnimationsModule,
-    PaginationModule
+    PaginationModule,
+    ModalModule
   ],
   exports: [
     BsDropdownModule,
@@ -32,7 +34,8 @@ import { PaginationModule } from 'ngx-bootstrap/pagination'
     FileUploadModule,
     BsDatepickerModule,
     BrowserAnimationsModule,
-    PaginationModule
+    PaginationModule,
+    ModalModule
   ]
 })
 export class SharedModule { }

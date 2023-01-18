@@ -1,5 +1,5 @@
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { NgModule } from '@angular/core';
+import { NgModule, RendererFactory2 } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 
@@ -33,6 +33,8 @@ import { AdminPanelComponent } from './admin/admin-panel/admin-panel.component';
 import { HasRoleDirective } from './directives/has-role.directive';
 import { UserManagementComponent } from './admin/user-management/user-management.component';
 import { PhotoManagementComponent } from './admin/photo-management/photo-management.component';
+import { RolesModalComponent } from './modals/roles-modal/roles-modal.component';
+import { ModalModule } from 'ngx-bootstrap/modal';
 
 @NgModule({
   declarations: [
@@ -56,7 +58,8 @@ import { PhotoManagementComponent } from './admin/photo-management/photo-managem
     AdminPanelComponent,
     HasRoleDirective,
     UserManagementComponent,
-    PhotoManagementComponent
+    PhotoManagementComponent,
+    RolesModalComponent
   ],
   imports: [
     BrowserAnimationsModule,
@@ -65,6 +68,7 @@ import { PhotoManagementComponent } from './admin/photo-management/photo-managem
     HttpClientModule,
     FormsModule,
     TooltipModule.forRoot(),
+    ModalModule.forRoot(),
     NgbModule,
     SharedModule,
     ReactiveFormsModule,
