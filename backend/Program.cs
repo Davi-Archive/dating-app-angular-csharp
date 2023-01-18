@@ -36,7 +36,11 @@ app.UseSwaggerUI();
 //app.UseHttpsRedirection();
 
 
-app.UseCors(builder => builder.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());
+app.UseCors(builder => builder
+.AllowAnyHeader()
+.AllowAnyMethod()
+.AllowCredentials()
+.AllowAnyOrigin());
 
 // authentication SPECIFIC LOCATION
 
