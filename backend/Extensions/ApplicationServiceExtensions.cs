@@ -3,6 +3,7 @@ using DatingApp.Data;
 using DatingApp.Helpers;
 using DatingApp.Interface;
 using DatingApp.Services;
+using DatingApp.SignalR;
 using dotenv.net;
 using Microsoft.EntityFrameworkCore;
 
@@ -15,6 +16,7 @@ namespace DatingApp.Extensions
         {
             services.AddEndpointsApiExplorer();
             services.AddSwaggerGen();
+            services.AddSingleton<PresenceTracker>();
             services.AddScoped<ITokenService, TokenService>();
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<ILikesRepository, LikesRepository>();
