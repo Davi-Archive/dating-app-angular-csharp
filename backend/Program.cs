@@ -23,6 +23,15 @@ builder.Services.AddIdentityServices(builder.Configuration);
 
 builder.Services.AddScoped<ITokenService, TokenService>();
 
+var portExists = int.TryParse(Environment.GetEnvironmentVariable("PORT"), out var port);
+if (portExists)
+{
+    builder.WebHost.ConfigureKestrel(options =>
+    {
+        options.ListenAnyIP(port);
+    });
+}
+
 var app = builder.Build();
 
 // MIDDLEWARE FIRST
@@ -35,7 +44,7 @@ app.UseSwaggerUI();
 
 //app.UseHttpsRedirection();
 
-string[] origins = { "http://localhost:4200", "http://localhost:8080" };
+string[] origins = { "http://localhost:4200", "http://localhost:8080", "https://dating-appl.herokuapp.com" };
 
 app.UseCors(builder => builder
 .AllowAnyHeader()
