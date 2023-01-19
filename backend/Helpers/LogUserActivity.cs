@@ -1,6 +1,7 @@
 ﻿using DatingApp.Extensions;
 using DatingApp.Interface;
 using Microsoft.AspNetCore.Mvc.Filters;
+using Microsoft.IdentityModel.Tokens;
 
 namespace DatingApp.Helpers
 {
@@ -16,7 +17,9 @@ namespace DatingApp.Helpers
 
             var uow = resultContext.HttpContext.RequestServices.GetRequiredService<IUnitOfWork>();
 
-            var user = await uow.UserRepository.GetUserByIdAsync(int.Parse(userId));
+            var parsedId = userId.IsNullOrEmpty() ? "1" : userId;
+
+            var user = await uow.UserRepository.GetUserByIdAsync(int.Parse(parsedId));
             user.LastActive = DateTime.UtcNow;
 
             await uow.Complete();

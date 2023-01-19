@@ -39,7 +39,9 @@ app.UseSwaggerUI();
 app.UseCors(builder => builder
 .AllowAnyHeader()
 .AllowAnyMethod()
-.AllowAnyOrigin());
+.AllowCredentials()
+.WithOrigins("http://localhost:4200")
+);
 
 // authentication SPECIFIC LOCATION
 

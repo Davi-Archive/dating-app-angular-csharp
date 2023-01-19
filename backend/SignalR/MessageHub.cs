@@ -82,11 +82,12 @@ namespace DatingApp.SignalR
         private string GetGroupName(string caller, string other)
         {
             var stringCompare = string.CompareOrdinal(caller, other) < 0;
-            return stringCompare ? $"{caller}--{other}" : $"{other}--{caller}";
+            return stringCompare ? $"{caller}-{other}" : $"{other}-{caller}";
         }
 
         private async Task<bool> AddToGroup(string groupName)
         {
+            groupName = groupName ?? string.Empty;
             var group = await _uow.MessageRepository.GetMessageGroup(groupName);
             var connection = new Connection(Context.ConnectionId, Context.User.GetUsername());
 
