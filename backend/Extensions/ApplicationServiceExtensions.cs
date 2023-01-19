@@ -27,7 +27,9 @@ namespace DatingApp.Extensions
             cloudinary.Api.Secure = true;
             services.AddDbContext<DataContext>(opt =>
             {
-                opt.UseSqlite(config.GetConnectionString("DefaultConnection"));
+                var serverVersion = new MySqlServerVersion(new Version(8, 0, 31));
+                opt.UseMySql(config.GetConnectionString("DefaultConnection2"), serverVersion);
+                //opt.UseSqlite(config.GetConnectionString("DefaultConnection"));
             });
             services.AddSignalR();
 

@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "1VTfCYez19/g8ZefPNqRvvswBLIvrZK1UvlkG/rygsA=",
+  "Hash": "/gXTbya6ADhsHCyWYIH+RefkdohY349fd2voVr06deA=",
   "Source": "DatingApp",
   "BasePath": "_content/DatingApp",
   "Mode": "Default",
@@ -170,12 +170,12 @@
       "OriginalItemSpec": "wwwroot\\index.html"
     },
     {
-      "Identity": "C:\\Users\\Machinery\\Desktop\\Git\\dating-app-angular-csharp\\backend\\wwwroot\\main.fba1494f6c4dc19a.js",
+      "Identity": "C:\\Users\\Machinery\\Desktop\\Git\\dating-app-angular-csharp\\backend\\wwwroot\\main.2d34102c79b0cc24.js",
       "SourceId": "DatingApp",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\Machinery\\Desktop\\Git\\dating-app-angular-csharp\\backend\\wwwroot\\",
       "BasePath": "_content/DatingApp",
-      "RelativePath": "main.fba1494f6c4dc19a.js",
+      "RelativePath": "main.2d34102c79b0cc24.js",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -184,7 +184,7 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\main.fba1494f6c4dc19a.js"
+      "OriginalItemSpec": "wwwroot\\main.2d34102c79b0cc24.js"
     },
     {
       "Identity": "C:\\Users\\Machinery\\Desktop\\Git\\dating-app-angular-csharp\\backend\\wwwroot\\polyfills.a028c55f58455cf5.js",

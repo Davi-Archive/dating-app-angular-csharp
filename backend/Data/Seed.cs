@@ -35,7 +35,10 @@ namespace DatingApp.Data
             {
                 user.UserName = user.UserName.ToLower();
 
-                await userManager.CreateAsync(user, "Pa$$w0rd");
+                user.Created = DateTime.SpecifyKind(user.Created, DateTimeKind.Utc);
+                user.LastActive = DateTime.SpecifyKind(user.LastActive, DateTimeKind.Utc);
+
+                await userManager.CreateAsync(user, "password");
                 await userManager.AddToRoleAsync(user, "Member");
             }
 
@@ -44,7 +47,7 @@ namespace DatingApp.Data
                 UserName = "admin",
             };
 
-            await userManager.CreateAsync(admin, "Pa$$w0rd");
+            await userManager.CreateAsync(admin, "password");
             await userManager.AddToRolesAsync(admin, new[] { "Admin", "Moderator" });
 
         }
