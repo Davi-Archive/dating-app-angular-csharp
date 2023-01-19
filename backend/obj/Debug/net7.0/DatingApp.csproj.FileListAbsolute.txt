@@ -84,3 +84,4 @@ C:\Users\Machinery\Desktop\Git\dating-app-angular-csharp\backend\bin\Debug\net7.
 C:\Users\Machinery\Desktop\Git\dating-app-angular-csharp\backend\bin\Debug\net7.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
 C:\Users\Machinery\Desktop\Git\dating-app-angular-csharp\backend\bin\Debug\net7.0\Microsoft.Extensions.Identity.Core.dll
 C:\Users\Machinery\Desktop\Git\dating-app-angular-csharp\backend\bin\Debug\net7.0\Microsoft.Extensions.Identity.Stores.dll
+C:\Users\Machinery\Desktop\Git\dating-app-angular-csharp\backend\bin\Debug\net7.0\DatingApp.staticwebassets.runtime.json
