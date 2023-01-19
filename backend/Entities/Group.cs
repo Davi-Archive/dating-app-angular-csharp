@@ -6,6 +6,10 @@ namespace DatingApp.Entities
     {
         private string groupName;
 
+        public Group()
+        {
+        }
+
         public Group(string groupName)
         {
             this.groupName = groupName;

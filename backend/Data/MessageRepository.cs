@@ -76,9 +76,7 @@ namespace DatingApp.Data
 
         public async Task<IEnumerable<MessageDto>> GetMessageThread(string currentUserName, string recipientUserName)
         {
-            var messages = await _context.Messages
-                .Include(u => u.Sender).ThenInclude(p => p.Photos)
-                .Include(u => u.Recipient).ThenInclude(p => p.Photos)
+            var query = _context.Messages
                 .Where(
                     m => m.RecipientUsername == currentUserName &&
                     m.RecipientDeleted == false &&
@@ -88,8 +86,9 @@ namespace DatingApp.Data
                     m.SenderUsername == currentUserName
                 )
                 .OrderBy(m => m.MessageSent)
-                .ToListAsync();
-            var unreadMessage = messages.Where(
+                .AsQueryable();
+
+            var unreadMessage = query.Where(
                 m => m.DateRead == null &&
                 m.RecipientUsername == currentUserName).ToList();
 
@@ -102,7 +101,7 @@ namespace DatingApp.Data
 
 
             }
-            return _mapper.Map<IEnumerable<MessageDto>>(messages);
+            return await query.ProjectTo<MessageDto>(_mapper.ConfigurationProvider).ToListAsync();
         }
 
         public void RemoveConnection(Connection connection)
