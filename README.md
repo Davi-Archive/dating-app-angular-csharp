@@ -1,6 +1,8 @@
 # Dating App
 
-This project is about an dating app proof-of-concept
+This project is about an dating app proof-of-concept, where you are capable of creating an user and uploading
+photos (one needs to be the main) and also edit your profile after creating (uploading an image is not required),
+once you have an profile you can like and message(still implementing) users in realtime!
 
 # This Site is Live
 
