@@ -1,4 +1,5 @@
-﻿using DatingApp.DTOs;
+﻿using AutoMapper;
+using DatingApp.DTOs;
 using DatingApp.Entities;
 using DatingApp.Helpers;
 using DatingApp.Interface;
@@ -9,10 +10,16 @@ namespace DatingApp.Data
     public class UserRepository : IUserRepository
     {
         private readonly DataContext _context;
+        private IMapper mapper;
 
         public UserRepository(DataContext context)
         {
             _context = context;
+        }
+
+        public UserRepository(DataContext context, IMapper mapper) : this(context)
+        {
+            this.mapper = mapper;
         }
 
         public async Task<MemberDto> GetUserByIdAsync(int id)
@@ -49,11 +56,6 @@ namespace DatingApp.Data
                 .Skip(4)
                 .Include(p => p.Photos).ToListAsync();
             return list.Select(user => new MemberDto(user)).ToList();
-        }
-
-        public async Task<bool> SaveAllAsync()
-        {
-            return await _context.SaveChangesAsync() > 0;
         }
 
         public async void Update(AppUser user)

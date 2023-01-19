@@ -1,4 +1,5 @@
-﻿using DatingApp.DTOs;
+﻿using AutoMapper;
+using DatingApp.DTOs;
 using DatingApp.Entities;
 using DatingApp.Extensions;
 using DatingApp.Helpers;
@@ -10,9 +11,16 @@ namespace DatingApp.Data
     public class LikesRepository : ILikesRepository
     {
         private readonly DataContext _context;
+        private IMapper mapper;
+
         public LikesRepository(DataContext context)
         {
             _context = context;
+        }
+
+        public LikesRepository(DataContext context, IMapper mapper) : this(context)
+        {
+            this.mapper = mapper;
         }
 
         public async Task<UserLike> GetUserLike(int sourceUserId, int targetUserId)

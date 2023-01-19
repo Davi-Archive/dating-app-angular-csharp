@@ -7,7 +7,6 @@ namespace DatingApp.Interface
     public interface IUserRepository
     {
         void Update(AppUser user);
-        Task<bool> SaveAllAsync();
         Task<IEnumerable<MemberDto>> GetUsersAsync();
         Task<MemberDto> GetUserByIdAsync(int id);
         Task<AppUser> GetAppUserByIdAsync(int id);
