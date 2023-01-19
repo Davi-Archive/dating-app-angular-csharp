@@ -11,16 +11,10 @@ namespace DatingApp.SignalR
     [Authorize]
     public class MessageHub : Hub
     {
-        private readonly IMessageRepository _messageRepository;
-        private readonly IUserRepository _userRepository;
+        private readonly IUnitOfWork _uow;
         private readonly IMapper _mapper;
 
-        public MessageHub(IMessageRepository messageRepository, IUserRepository userRepository, IMapper mapper)
-        {
-            _messageRepository = messageRepository;
-            _userRepository = userRepository;
-            _mapper = mapper;
-        }
+
 
         public override async Task OnConnectedAsync()
         {
@@ -30,7 +24,10 @@ namespace DatingApp.SignalR
             await Groups.AddToGroupAsync(Context.ConnectionId, groupName);
             await AddToGroup(groupName);
 
-            var messages = await _messageRepository.GetMessageThread(Context.User.GetUsername(), otherUser);
+            var messages = await _uow.MessageRepository
+                .GetMessageThread(Context.User.GetUsername(), otherUser);
+
+            if (_uow.HasChanges()) await _uow.Complete();
 
 
             await Clients.Group(groupName).SendAsync("ReceiveMessageThread", messages);
@@ -50,8 +47,8 @@ namespace DatingApp.SignalR
             if (username == createMessageDto.RecipientUsername.ToLower())
                 throw new HubException("You cannot send message to yourself");
 
-            var sender = await _userRepository.GetAppUserByUsernameAsync(username);
-            var recipient = await _userRepository.GetAppUserByUsernameAsync(createMessageDto.RecipientUsername);
+            var sender = await _uow.UserRepository.GetAppUserByUsernameAsync(username);
+            var recipient = await _uow.UserRepository.GetAppUserByUsernameAsync(createMessageDto.RecipientUsername);
 
             if (recipient == null) throw new HubException("Not found user");
 
@@ -65,16 +62,16 @@ namespace DatingApp.SignalR
             };
 
             var groupName = GetGroupName(sender.UserName, recipient.UserName);
-            var group = await _messageRepository.GetMessageGroup(groupName);
+            var group = await _uow.MessageRepository.GetMessageGroup(groupName);
 
             if (group.Connections.Any(x => x.Username == recipient.UserName))
             {
                 message.DateRead = DateTime.UtcNow;
             }
 
-            _messageRepository.AddMessage(message);
+            _uow.MessageRepository.AddMessage(message);
 
-            if (await _messageRepository.SaveAllAsync())
+            if (await _uow.Complete())
             {
                 await Clients.Group(groupName).SendAsync("NewMessage", _mapper.Map<MessageDto>(message));
             }
@@ -90,24 +87,24 @@ namespace DatingApp.SignalR
 
         private async Task<bool> AddToGroup(string groupName)
         {
-            var group = await _messageRepository.GetMessageGroup(groupName);
+            var group = await _uow.MessageRepository.GetMessageGroup(groupName);
             var connection = new Connection(Context.ConnectionId, Context.User.GetUsername());
 
             if (group == null)
             {
                 group = new Group(groupName);
-                _messageRepository.AddGroup(group);
+                _uow.MessageRepository.AddGroup(group);
             }
 
             group.Connections.Add(connection);
-            return await _messageRepository.SaveAllAsync();
+            return await _uow.Complete();
         }
 
         private async Task RemoveFromMessageGroup()
         {
-            var connection = await _messageRepository.GetConnection(Context.ConnectionId);
-            _messageRepository.RemoveConnection(connection);
-            await _messageRepository.SaveAllAsync();
+            var connection = await _uow.MessageRepository.GetConnection(Context.ConnectionId);
+            _uow.MessageRepository.RemoveConnection(connection);
+            await _uow.Complete();
         }
     }
 }
