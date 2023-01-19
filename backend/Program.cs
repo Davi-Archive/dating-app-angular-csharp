@@ -35,12 +35,13 @@ app.UseSwaggerUI();
 
 //app.UseHttpsRedirection();
 
+string[] origins = { "http://localhost:4200", "http://localhost:8080" };
 
 app.UseCors(builder => builder
 .AllowAnyHeader()
 .AllowAnyMethod()
 .AllowCredentials()
-.WithOrigins("http://localhost:4200")
+.WithOrigins(origins)
 );
 
 // authentication SPECIFIC LOCATION

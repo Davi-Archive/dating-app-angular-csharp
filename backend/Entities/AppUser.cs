@@ -6,7 +6,6 @@ namespace DatingApp.Entities
 {
     public class AppUser : IdentityUser<int>
     {
-
         public DateOnly DateOfBirth { get; set; }
         public string KnownAs { get; set; }
         public DateTime Created { get; set; } = DateTime.UtcNow;

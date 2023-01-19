@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace DatingApp.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class MysqlInitial : Migration
+    public partial class MySQLAdded : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
