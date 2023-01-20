@@ -8,6 +8,9 @@ once you have an profile you can like and message(still implementing) users in r
 
 https://dating-appl.herokuapp.com/
 
+#### DEMO USER: Usuario1 
+#### DEMO PASSWORD: Usuario1
+
 # API documentation
 
 https://dating-appl.herokuapp.com/swagger/index.html
