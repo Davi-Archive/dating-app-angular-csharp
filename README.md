@@ -8,8 +8,8 @@ once you have an profile you can like and message(still implementing) users in r
 
 https://dating-appl.herokuapp.com/
 
-#### DEMO USER: Usuario1 
-#### DEMO PASSWORD: Usuario1
+#### DEMO USER: Usuario2
+#### DEMO PASSWORD: Usuario2
 
 # API documentation
 
